@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
+    <property name="connection.url">jdbc:sqlite:C:/Programming/JavaProjects/contest_system/db/contest_system.db</property>
+    <property name="connection.driver_class">org.sqlite.JDBC</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping class="domain.Admin"/>
+    <mapping class="domain.Attempt"/>
+    <mapping class="domain.Contestant"/>
+    <mapping class="domain.Contest"/>
+    <mapping class="domain.Problem"/>
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
