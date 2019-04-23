@@ -6,8 +6,10 @@ import domain.entities.Problem;
 import domain.testing.Tester;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import utility.HibernateSessionFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttemptManager {
@@ -15,11 +17,11 @@ public class AttemptManager {
     private Tester tester = new Tester();
 
     public List<Attempt> getAllAttempts(Problem problem) {
-        return null;
+        return new ArrayList<>(problem.getAttemptsById());
     }
 
     public List<Attempt> getUserAttempts(Problem problem, Contestant user) {
-        return null;
+        return new ArrayList<>(user.getAttemptsById());
     }
 
     public Attempt submitAttempt(Problem problem, String attemptText, String compiler, Contestant user) {
