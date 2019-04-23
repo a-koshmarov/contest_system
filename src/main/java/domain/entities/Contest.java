@@ -53,6 +53,7 @@ public class Contest {
         return description;
     }
 
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -95,5 +96,10 @@ public class Contest {
 
     public void setProblemsById(Collection<Problem> problemsById) {
         this.problemsById = problemsById;
+    }
+
+    @Override
+    public String toString() {
+        return name+" "+startTime+" "+endTime;
     }
 }

@@ -1,5 +1,6 @@
 package controllers;
 
+import domain.entities.Contest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ import java.io.IOException;
 
 public class ContestView {
     @FXML
-    public ListView contestListView;
+    public ListView<Contest> contestListView;
     @FXML
     public TextArea contestDetails;
 
@@ -25,7 +26,7 @@ public class ContestView {
     }
 
     private void initList(){
-        contestListView.getItems().addAll("Contest ITMO 2019 superHackaton","Contest ITMO 2018 superHackaton");
+//        contestListView.getItems().addAll("Contest ITMO 2019 superHackaton","Contest ITMO 2018 superHackaton");
         //TODO get users contests
     }
 
@@ -40,6 +41,7 @@ public class ContestView {
     public void clickOnContest(MouseEvent event) throws IOException {
         if(contestListView.getSelectionModel().getSelectedItem() != null) {
             if (event.getClickCount() == 2) {
+                Context.setCurrentContest(contestListView.getSelectionModel().getSelectedItem());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/ProblemView.fxml")));
                 stage.setScene(scene);

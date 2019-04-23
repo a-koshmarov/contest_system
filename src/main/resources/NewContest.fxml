@@ -31,7 +31,7 @@
                   GridPane.rowIndex="1"/>
         <TextField fx:id="contestName" GridPane.columnIndex="1"/>
         <Button onAction="#addContest" mnemonicParsing="false" text="Save" GridPane.rowIndex="4"/>
-        <Button onAction="#cancel" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1"
+        <Button onAction="#contestCancel" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1"
                 GridPane.rowIndex="4"/>
     </children>
     <padding>

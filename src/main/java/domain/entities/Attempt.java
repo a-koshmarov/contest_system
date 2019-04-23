@@ -103,4 +103,9 @@ public class Attempt {
     public void setContestantsByContestantId(Contestant contestantsByContestantId) {
         this.contestantsByContestantId = contestantsByContestantId;
     }
+
+    @Override
+    public String toString(){
+        return "Return code: "+returnCode+", compiler: "+compiler+", test code: " +testCode+", accepted: " + accepted;
+    }
 }

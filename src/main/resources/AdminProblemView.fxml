@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -13,12 +11,12 @@
             <items>
                 <Button onAction="#handleAdd" mnemonicParsing="false" text="Add"/>
                 <Button onAction="#handleEdit" mnemonicParsing="false" text="Edit"/>
-                <Button mnemonicParsing="false" text="Delete"/>
-                <Button mnemonicParsing="false" text="Results"/>
-                <Button mnemonicParsing="false" text="All results"/>
+                <Button onAction="#handeDelete" mnemonicParsing="false" text="Delete"/>
+                <Button onAction="#results" mnemonicParsing="false" text="Results"/>
+                <Button onAction="#allResults" mnemonicParsing="false" text="All results"/>
                 <Button onAction="#chooseFile" mnemonicParsing="false" text="Upload file"/>
-                <ChoiceBox prefWidth="150.0"/>
-                <Button mnemonicParsing="false" text="Submit"/>
+                <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
+                <Button onAction="#submit" mnemonicParsing="false" text="Submit"/>
             </items>
         </ToolBar>
     </bottom>

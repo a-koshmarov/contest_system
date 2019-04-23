@@ -71,6 +71,11 @@ public class Problem {
         return contestsByContestId;
     }
 
+    @Override
+    public String toString(){
+        return name;
+    }
+
     public void setContestsByContestId(Contest contestsByContestId) {
         this.contestsByContestId = contestsByContestId;
     }
