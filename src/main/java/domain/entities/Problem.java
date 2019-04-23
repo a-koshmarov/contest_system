@@ -1,4 +1,7 @@
-package domain;
+package domain.entities;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -9,10 +12,20 @@ public class Problem {
     private Long id;
     private String name;
     private String description;
-    private Collection<Attempt> attemptById;
-    private Contest contestByContestId;
+    private Collection<Attempt> attemptsById;
+    private Contest contestsByContestId;
+
+    public Problem() {
+    }
+
+    public Problem(String name, String description, Contest contestsByContestId) {
+        this.name = name;
+        this.description = description;
+        this.contestsByContestId = contestsByContestId;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = true)
     public Long getId() {
         return id;
@@ -43,21 +56,22 @@ public class Problem {
     }
 
     @OneToMany(mappedBy = "problemsByProblemId")
-    public Collection<Attempt> getAttemptById() {
-        return attemptById;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Collection<Attempt> getAttemptsById() {
+        return attemptsById;
     }
 
-    public void setAttemptById(Collection<Attempt> attemptById) {
-        this.attemptById = attemptById;
+    public void setAttemptsById(Collection<Attempt> attemptsById) {
+        this.attemptsById = attemptsById;
     }
 
     @ManyToOne
     @JoinColumn(name = "contestID", referencedColumnName = "ID")
-    public Contest getContestByContestId() {
-        return contestByContestId;
+    public Contest getContestsByContestId() {
+        return contestsByContestId;
     }
 
-    public void setContestByContestId(Contest contestByContestId) {
-        this.contestByContestId = contestByContestId;
+    public void setContestsByContestId(Contest contestsByContestId) {
+        this.contestsByContestId = contestsByContestId;
     }
 }

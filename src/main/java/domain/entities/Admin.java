@@ -1,18 +1,15 @@
-package domain;
+package domain.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Objects;
 
 @Entity
-public class Contestant {
+public class Admin {
     private Long id;
     private String userName;
     private String password;
-    private Collection<Attempt> attemptById;
-    private Contest contestByContestId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = true)
     public Long getId() {
         return id;
@@ -40,24 +37,5 @@ public class Contestant {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @OneToMany(mappedBy = "contestantsByContestantId")
-    public Collection<Attempt> getAttemptById() {
-        return attemptById;
-    }
-
-    public void setAttemptById(Collection<Attempt> attemptById) {
-        this.attemptById = attemptById;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "contestID", referencedColumnName = "ID")
-    public Contest getContestByContestId() {
-        return contestByContestId;
-    }
-
-    public void setContestByContestId(Contest contestByContestId) {
-        this.contestByContestId = contestByContestId;
     }
 }

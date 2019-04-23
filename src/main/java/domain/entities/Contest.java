@@ -1,8 +1,10 @@
-package domain;
+package domain.entities;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Contest {
@@ -11,10 +13,21 @@ public class Contest {
     private String description;
     private String startTime;
     private String endTime;
-    private Collection<Contestant> contestantById;
-    private Collection<Problem> problemById;
+    private Collection<Contestant> contestantsById;
+    private Collection<Problem> problemsById;
+
+    public Contest() {
+    }
+
+    public Contest(String name, String description, String startTime, String endTime) {
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = true)
     public Long getId() {
         return id;
@@ -65,20 +78,22 @@ public class Contest {
     }
 
     @OneToMany(mappedBy = "contestsByContestId")
-    public Collection<Contestant> getContestantById() {
-        return contestantById;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Collection<Contestant> getContestantsById() {
+        return contestantsById;
     }
 
-    public void setContestantById(Collection<Contestant> contestantById) {
-        this.contestantById = contestantById;
+    public void setContestantsById(Collection<Contestant> contestantsById) {
+        this.contestantsById = contestantsById;
     }
 
     @OneToMany(mappedBy = "contestsByContestId")
-    public Collection<Problem> getProblemById() {
-        return problemById;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Collection<Problem> getProblemsById() {
+        return problemsById;
     }
 
-    public void setProblemById(Collection<Problem> problemById) {
-        this.problemById = problemById;
+    public void setProblemsById(Collection<Problem> problemsById) {
+        this.problemsById = problemsById;
     }
 }

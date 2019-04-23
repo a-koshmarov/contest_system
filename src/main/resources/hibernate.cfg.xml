@@ -9,11 +9,11 @@
     <property name="connection.driver_class">org.sqlite.JDBC</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping class="domain.Admin"/>
-    <mapping class="domain.Attempt"/>
-    <mapping class="domain.Contestant"/>
-    <mapping class="domain.Contest"/>
-    <mapping class="domain.Problem"/>
+    <mapping class="domain.entities.Admin"/>
+    <mapping class="domain.entities.Attempt"/>
+    <mapping class="domain.entities.Contestant"/>
+    <mapping class="domain.entities.Contest"/>
+    <mapping class="domain.entities.Problem"/>
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

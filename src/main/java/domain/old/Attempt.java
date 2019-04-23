@@ -1,4 +1,4 @@
-package domain;
+package domain.old;
 
 import javax.persistence.*;
 
