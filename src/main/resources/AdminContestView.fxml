@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminContestView">
+    <left>
+        <Button mnemonicParsing="false" onAction="#handleBack" text="Back" BorderPane.alignment="TOP_LEFT"/>
+    </left>
+    <right>
+        <TextArea editable="false" fx:id="contestDetails" prefHeight="360.0" prefWidth="363.0"
+                  BorderPane.alignment="CENTER"/>
+    </right>
+    <center>
+        <ListView fx:id="contestListView" onMouseClicked="#clickOnContest" prefHeight="360.0" prefWidth="181.0"
+                  BorderPane.alignment="CENTER"/>
+    </center>
+    <bottom>
+        <ToolBar fx:id="toolBar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button onAction="#handeAdd" mnemonicParsing="false" text="Add"/>
+                <Button onAction="#handleEdit" mnemonicParsing="false" text="Edit"/>
+                <Button mnemonicParsing="false" text="Delete"/>
+                <Button mnemonicParsing="false" text="Results"/>
+                <Button mnemonicParsing="false" text="All results"/>
+            </items>
+        </ToolBar>
+    </bottom>
+</BorderPane>

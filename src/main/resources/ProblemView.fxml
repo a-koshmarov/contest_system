@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProblemView">
+    <bottom>
+        <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button onAction="#chooseFile" mnemonicParsing="false" text="Upload file"/>
+                <ChoiceBox prefWidth="150.0"/>
+                <Button mnemonicParsing="false" text="Submit"/>
+                <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Results" textAlignment="CENTER"/>
+            </items>
+        </ToolBar>
+    </bottom>
+    <left>
+        <Button mnemonicParsing="false" onAction="#handleBack" text="Back" BorderPane.alignment="TOP_LEFT"/>
+    </left>
+    <right>
+        <TextArea fx:id="problemDescription" editable="false" prefHeight="360.0" prefWidth="363.0"
+                  BorderPane.alignment="CENTER"/>
+    </right>
+    <center>
+        <ListView fx:id="problemList" prefHeight="360.0" prefWidth="181.0" BorderPane.alignment="CENTER"/>
+    </center>
+</BorderPane>
