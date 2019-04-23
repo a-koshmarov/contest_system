@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: f2f4f3;"
+      stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.Start">
+    <children>
+        <Text fill="#b4d1f3" stroke="#7d8491" strokeType="OUTSIDE" text="M3205 Contest System">
+            <font>
+                <Font name="Marlett" size="36.0"/>
+            </font>
+        </Text>
+        <Button mnemonicParsing="false" onAction="#contestant"
+                style="-fx-background-color: #7d8491; -fx-text-fill: WHITE;" text="Log in as a contestant"
+                textFill="#f45b69"/>
+        <Button mnemonicParsing="false" onAction="#admin" style="-fx-background-color: #7d8491; -fx-text-fill: WHITE;"
+                text="Log in as an admin" textFill="#7d8491"/>
+    </children>
+    <padding>
+        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+    </padding>
+</VBox>
