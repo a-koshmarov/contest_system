@@ -1,6 +1,7 @@
 package controllers;
 
 import domain.entities.Contest;
+import domain.managers.ContestantManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ public class ContestView {
     @FXML
     public TextArea contestDetails;
 
+    private ContestantManager contestantManager = new ContestantManager();
+
 
     @FXML
     public void initialize(){
@@ -26,8 +29,8 @@ public class ContestView {
     }
 
     private void initList(){
-//        contestListView.getItems().addAll("Contest ITMO 2019 superHackaton","Contest ITMO 2018 superHackaton");
-        //TODO get users contests
+        contestListView.getItems().clear();
+        contestListView.getItems().addAll(contestantManager.getAttemptManager().getUserContest(Context.getCurrentContestant()));
     }
 
     @FXML
@@ -46,8 +49,7 @@ public class ContestView {
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/ProblemView.fxml")));
                 stage.setScene(scene);
             } else {
-                //TODO init TextArea
-                contestDetails.setText(contestListView.getSelectionModel().getSelectedItem().toString());
+                contestDetails.setText(contestListView.getSelectionModel().getSelectedItem().getDescription());
             }
         }
     }

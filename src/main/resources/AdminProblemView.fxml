@@ -4,16 +4,16 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
+            prefHeight="400.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminProblemView">
     <bottom>
         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
                 <Button onAction="#handleAdd" mnemonicParsing="false" text="Add"/>
                 <Button onAction="#handleEdit" mnemonicParsing="false" text="Edit"/>
-                <Button onAction="#handeDelete" mnemonicParsing="false" text="Delete"/>
+                <Button onAction="#handleDelete" mnemonicParsing="false" text="Delete"/>
                 <Button onAction="#results" mnemonicParsing="false" text="Results"/>
-                <Button onAction="#allResults" mnemonicParsing="false" text="All results"/>
+                <Button onAction="#allResults" mnemonicParsing="false" text="All user results"/>
                 <Button onAction="#chooseFile" mnemonicParsing="false" text="Upload file"/>
                 <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
                 <Button onAction="#submit" mnemonicParsing="false" text="Submit"/>

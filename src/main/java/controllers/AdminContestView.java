@@ -149,25 +149,20 @@ public class AdminContestView {
     }
 
     @FXML
-    public void handleResult() throws IOException {
+    public void handleResult(ActionEvent event) throws IOException {
         if (contestListView.getSelectionModel().getSelectedItem() != null) {
-            Stage stage = new Stage();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             BorderPane pane = new BorderPane();
-            Button refresh = new Button("Refresh");
+            Button back = new Button("Back");
 
-            pane.setTop(refresh);
+            pane.setTop(back);
             ListView<Attempt> attemptListView = new ListView<>();
 
-            refresh.setOnAction(event -> {
-                attemptListView.getItems().clear();
-                if (contestListView.getSelectionModel().getSelectedItem() != null) {
-                    attemptListView.getItems().addAll(getContestAttempts(contestListView.getSelectionModel().getSelectedItem()));
-                }
-            });
+            back(back);
             attemptListView.getItems().addAll(getContestAttempts(contestListView.getSelectionModel().getSelectedItem()));
             pane.setCenter(attemptListView);
 
-            Scene scene = new Scene(pane, 200, 300);
+            Scene scene = new Scene(pane, 700, 400);
             stage.setScene(scene);
 
             stage.setTitle(contestListView.getSelectionModel().getSelectedItem().getName() + " results");
@@ -176,30 +171,40 @@ public class AdminContestView {
     }
 
     @FXML
-    public void handleAllResult() {
-        Stage stage = new Stage();
+    public void handleAllResult(ActionEvent event) {
+        Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
         BorderPane pane = new BorderPane();
-        Button refresh = new Button("Refresh");
+        Button back = new Button("Back");
 
-        pane.setTop(refresh);
+        pane.setTop(back);
         ListView<Attempt> attemptListView = new ListView<>();
 
-        refresh.setOnAction(event -> {
-            attemptListView.getItems().clear();
-            for (Contest contest : adminManager.getContestManager().getContests()) {
-                attemptListView.getItems().addAll(getContestAttempts(contest));
-            }
-        });
+        back(back);
         for (Contest contest : adminManager.getContestManager().getContests()) {
             attemptListView.getItems().addAll(getContestAttempts(contest));
         }
         pane.setCenter(attemptListView);
 
-        Scene scene = new Scene(pane, 600, 300);
-        stage.setScene(scene);
+        Scene scene = new Scene(pane, 700, 400);
 
         stage.setTitle("All results");
-        stage.show();
+        stage.setScene(scene);
+
+
+    }
+
+    private void back(Button back) {
+        back.setOnAction(event1 -> {
+            Stage stage1 = (Stage) ((Node) event1.getSource()).getScene().getWindow();
+            Scene scene = null;
+            try {
+                scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminContestView.fxml")));
+            } catch (IOException e) {
+                System.out.println("error");
+                e.printStackTrace();
+            }
+            stage1.setScene(scene);
+        });
     }
 
     @FXML

@@ -14,7 +14,7 @@
                 <Button onAction="#chooseFile" mnemonicParsing="false" text="Upload file"/>
                 <ChoiceBox prefWidth="150.0"/>
                 <Button mnemonicParsing="false" text="Submit"/>
-                <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Results" textAlignment="CENTER"/>
+                <Button onAction="#showResults" alignment="TOP_LEFT" mnemonicParsing="false" text="Results" textAlignment="CENTER"/>
             </items>
         </ToolBar>
     </bottom>
@@ -26,6 +26,6 @@
                   BorderPane.alignment="CENTER"/>
     </right>
     <center>
-        <ListView fx:id="problemList" prefHeight="360.0" prefWidth="181.0" BorderPane.alignment="CENTER"/>
+        <ListView onMouseClicked="#clickOnProblem" fx:id="problemList" prefHeight="360.0" prefWidth="181.0" BorderPane.alignment="CENTER"/>
     </center>
 </BorderPane>

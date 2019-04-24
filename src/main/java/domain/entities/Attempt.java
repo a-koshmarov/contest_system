@@ -105,7 +105,7 @@ public class Attempt {
     }
 
     @Override
-    public String toString(){
-        return "Return code: "+returnCode+", compiler: "+compiler+", test code: " +testCode+", accepted: " + accepted;
+    public String toString() {
+        return "Problem: "+problemsByProblemId.getName()+", text: " + text + ", return code: " + returnCode + ", compiler: " + compiler + ", test code: " + testCode + ", accepted: " + accepted;
     }
 }

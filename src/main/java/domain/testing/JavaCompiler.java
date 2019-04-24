@@ -16,4 +16,9 @@ public class JavaCompiler implements Compiler {
             return new JavaExec(0, attempt.getText());
         }
     }
+
+    @Override
+    public String toString(){
+        return "java";
+    }
 }

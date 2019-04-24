@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <GridPane fx:controller="controllers.NewContestAndProblem" maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" stylesheets="@style.css"
+          minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" stylesheets="@style.css"
           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="79.0"/>

@@ -1,5 +1,7 @@
 package controllers;
 
+import domain.entities.Problem;
+import domain.managers.ContestantManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +17,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class ProblemView {
-    public ListView problemList;
+    public ListView<Problem> problemList;
     public TextArea problemDescription;
 
     private final FileChooser fileChooser = new FileChooser();
+    private ContestantManager contestantManager = new ContestantManager();
 
     @FXML
     public void initialize(){
@@ -26,8 +29,8 @@ public class ProblemView {
     }
 
     private void initList(){
-        problemList.getItems().addAll("Problem 1", "Problem 2");
-        //TODO get contests problem
+        problemList.getItems().clear();
+        problemList.getItems().addAll(contestantManager.getAttemptManager().getAllProblems(Context.getCurrentContest()));
     }
 
     @FXML
@@ -48,5 +51,8 @@ public class ProblemView {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
         //TODO something with file
+    }
+
+    public void showResults(ActionEvent event) {
     }
 }

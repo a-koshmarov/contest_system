@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import utility.HibernateSessionFactory;
 
+import javax.swing.text.html.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,13 @@ public class AttemptManager {
     }
 
     public List<Attempt> getUserAttempts(Problem problem, Contestant user) {
-        return new ArrayList<>(user.getAttemptsById());
+        List<Attempt> userAttempts = new ArrayList<>();
+        for(Attempt attempt: user.getAttemptsById()){
+            if(attempt.getProblemsByProblemId().getId().equals(problem.getId())){
+                userAttempts.add(attempt);
+            }
+        }
+        return userAttempts ;
     }
 
     public Attempt submitAttempt(Problem problem, String attemptText, String compiler, Contestant user) {
