@@ -6,10 +6,8 @@ import domain.entities.Problem;
 import domain.testing.Tester;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import utility.HibernateSessionFactory;
 
-import javax.swing.text.html.ListView;
 import java.util.ArrayList;
 import java.util.List;
 

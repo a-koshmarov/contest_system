@@ -5,7 +5,7 @@
 <hibernate-configuration>
   <session-factory>
     <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
-    <property name="connection.url">jdbc:sqlite:D:/JavaProjects/contest_system/db/contest_system.db</property>
+    <property name="connection.url">jdbc:sqlite:db/contest_system.db</property>
     <property name="connection.driver_class">org.sqlite.JDBC</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
