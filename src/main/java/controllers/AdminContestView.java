@@ -4,25 +4,20 @@ import domain.entities.Attempt;
 import domain.entities.Contest;
 import domain.entities.Problem;
 import domain.managers.AdminManager;
-import domain.managers.AttemptManager;
-import domain.managers.ContestManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import util.Context;
+import util.Warnings;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,7 +66,7 @@ public class AdminContestView {
 
     @FXML
     public void clickOnContest(MouseEvent event) throws IOException {
-        if(contestListView.getSelectionModel().getSelectedItem() != null) {
+        if (contestListView.getSelectionModel().getSelectedItem() != null) {
             if (event.getClickCount() == 2) {
                 Context.setCurrentContest(contestListView.getSelectionModel().getSelectedItem());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -86,46 +81,50 @@ public class AdminContestView {
 
     @FXML
     public void handleDelete(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        BorderPane pane = new BorderPane();
-        pane.setPadding(new Insets(30,50,50,50));
-        Button yes = new Button("Yes");
-        Button no = new Button("No");
+        if (contestListView.getSelectionModel().getSelectedItem() != null) {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            BorderPane pane = new BorderPane();
+            pane.setPadding(new Insets(30, 50, 50, 50));
+            Button yes = new Button("Yes");
+            Button no = new Button("No");
 
-        pane.setLeft(yes);
-        pane.setRight(no);
-        pane.setTop(new Text("Are you sure that you want to delete: " + contestListView.getSelectionModel().getSelectedItem().getName()));
+            pane.setLeft(yes);
+            pane.setRight(no);
+            pane.setTop(new Text("Are you sure that you want to delete: " + contestListView.getSelectionModel().getSelectedItem().getName()));
 
-        yes.setOnAction(newEvent -> {
-            adminManager.getContestManager().cancelContest(contestListView.getSelectionModel().getSelectedItem());
-            Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try {
-                scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminContestView.fxml")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            newStage.setTitle("Admin contest view");
-            newStage.setScene(scene);
-        });
+            yes.setOnAction(newEvent -> {
+                adminManager.getContestManager().cancelContest(contestListView.getSelectionModel().getSelectedItem());
+                Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminContestView.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                newStage.setTitle("Admin contest view");
+                newStage.setScene(scene);
+            });
 
-        no.setOnAction(newEvent -> {
-            Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try {
-                scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminContestView.fxml")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            newStage.setTitle("Admin contest view");
-            newStage.setScene(scene);
-        });
+            no.setOnAction(newEvent -> {
+                Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminContestView.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                newStage.setTitle("Admin contest view");
+                newStage.setScene(scene);
+            });
 
-        Scene scene = new Scene(pane, 400, 400);
-        stage.setScene(scene);
+            Scene scene = new Scene(pane, 400, 400);
+            stage.setScene(scene);
 
-        stage.setTitle(contestListView.getSelectionModel().getSelectedItem().getName() + " removing");
-        stage.show();
+            stage.setTitle(contestListView.getSelectionModel().getSelectedItem().getName() + " removing");
+            stage.show();
+        } else {
+            Warnings.selectTheContestWarning();
+        }
 
     }
 
@@ -149,7 +148,7 @@ public class AdminContestView {
     }
 
     @FXML
-    public void handleResult(ActionEvent event) throws IOException {
+    public void handleAllResult(ActionEvent event) {
         if (contestListView.getSelectionModel().getSelectedItem() != null) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             BorderPane pane = new BorderPane();
@@ -167,28 +166,27 @@ public class AdminContestView {
 
             stage.setTitle(contestListView.getSelectionModel().getSelectedItem().getName() + " results");
             stage.show();
+        } else {
+            Warnings.selectTheContestWarning();
         }
-    }
 
-    @FXML
-    public void handleAllResult(ActionEvent event) {
-        Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
-        BorderPane pane = new BorderPane();
-        Button back = new Button("Back");
-
-        pane.setTop(back);
-        ListView<Attempt> attemptListView = new ListView<>();
-
-        back(back);
-        for (Contest contest : adminManager.getContestManager().getContests()) {
-            attemptListView.getItems().addAll(getContestAttempts(contest));
-        }
-        pane.setCenter(attemptListView);
-
-        Scene scene = new Scene(pane, 700, 400);
-
-        stage.setTitle("All results");
-        stage.setScene(scene);
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        BorderPane pane = new BorderPane();
+//        Button back = new Button("Back");
+//
+//        pane.setTop(back);
+//        ListView<Attempt> attemptListView = new ListView<>();
+//
+//        back(back);
+//        for (Contest contest : adminManager.getContestManager().getContests()) {
+//            attemptListView.getItems().addAll(getContestAttempts(contest));
+//        }
+//        pane.setCenter(attemptListView);
+//
+//        Scene scene = new Scene(pane, 700, 400);
+//
+//        stage.setTitle("All results");
+//        stage.setScene(scene);
 
 
     }
@@ -215,7 +213,4 @@ public class AdminContestView {
         contestDetails.setEditable(true);
     }
 
-    public void refresh(ActionEvent event) {
-        initList();
-    }
 }

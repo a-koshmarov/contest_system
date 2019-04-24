@@ -23,8 +23,8 @@ public class AttemptManager {
 
     public List<Attempt> getUserAttempts(Problem problem, Contestant user) {
         List<Attempt> userAttempts = new ArrayList<>();
-        for(Attempt attempt: user.getAttemptsById()){
-            if(attempt.getProblemsByProblemId().getId().equals(problem.getId())){
+        for(Attempt attempt: getAllAttempts(problem)){
+            if(attempt.getContestantsByContestantId().getUserName().equals(user.getUserName())){
                 userAttempts.add(attempt);
             }
         }

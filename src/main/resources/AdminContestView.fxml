@@ -25,7 +25,7 @@
                 <Button onAction="#handleAdd" mnemonicParsing="false" text="Add"/>
                 <Button onAction="#handleEdit" mnemonicParsing="false" text="Edit"/>
                 <Button onAction="#handleDelete" mnemonicParsing="false" text="Delete"/>
-                <Button onAction="#handleResult" mnemonicParsing="false" text="Contest results"/>
+                <!--<Button onAction="#handleResult" mnemonicParsing="false" text="Contest results"/>-->
                 <Button onAction="#handleAllResult" mnemonicParsing="false" text="All contest results"/>
             </items>
         </ToolBar>

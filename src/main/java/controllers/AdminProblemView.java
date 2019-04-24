@@ -2,7 +2,6 @@ package controllers;
 
 import domain.entities.*;
 import domain.managers.AdminManager;
-import domain.managers.ContestantManager;
 import domain.testing.JavaCompiler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -18,11 +16,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import util.Context;
+import util.Warnings;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AdminProblemView {
@@ -94,60 +93,54 @@ public class AdminProblemView {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/newProblem.fxml")));
         stage.setTitle("New problem");
         stage.setScene(scene);
-//        stage.setScene(scene);
-//        Parent root = FXMLLoader.load(getClass().getResource("/newProblem.fxml"));
-//        Scene scene = new Scene(root);
-//        Stage stage = new Stage();
-//        stage.setOnHidden((event) -> {
-//            initList();
-//        });
-//        stage.setTitle("New Contest");
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     @FXML
     public void handleDelete(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        BorderPane pane = new BorderPane();
-        pane.setPadding(new Insets(30, 50, 50, 50));
-        Button yes = new Button("Yes");
-        Button no = new Button("No");
+        if (problemList.getSelectionModel().getSelectedItem() != null) {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            BorderPane pane = new BorderPane();
+            pane.setPadding(new Insets(30, 50, 50, 50));
+            Button yes = new Button("Yes");
+            Button no = new Button("No");
 
-        pane.setLeft(yes);
-        pane.setRight(no);
-        pane.setTop(new Text("Are you sure that you want to delete: " + problemList.getSelectionModel().getSelectedItem().getName()));
+            pane.setLeft(yes);
+            pane.setRight(no);
+            pane.setTop(new Text("Are you sure that you want to delete: " + problemList.getSelectionModel().getSelectedItem().getName()));
 
-        yes.setOnAction(newEvent -> {
-            adminManager.getProblemManager().removeProblem(Context.getCurrentContest(), problemList.getSelectionModel().getSelectedItem());
-            Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try {
-                scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminProblemView.fxml")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            newStage.setTitle("Admin problem view");
-            newStage.setScene(scene);
-        });
+            yes.setOnAction(newEvent -> {
+                adminManager.getProblemManager().removeProblem(Context.getCurrentContest(), problemList.getSelectionModel().getSelectedItem());
+                Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminProblemView.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                newStage.setTitle("Admin problem view");
+                newStage.setScene(scene);
+            });
 
-        no.setOnAction(newEvent -> {
-            Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try {
-                scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminProblemView.fxml")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            newStage.setTitle("Admin problem view");
-            newStage.setScene(scene);
-        });
+            no.setOnAction(newEvent -> {
+                Stage newStage = (Stage) ((Node) newEvent.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminProblemView.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                newStage.setTitle("Admin problem view");
+                newStage.setScene(scene);
+            });
 
-        Scene scene = new Scene(pane, 400, 400);
-        stage.setScene(scene);
+            Scene scene = new Scene(pane, 400, 400);
+            stage.setScene(scene);
 
-        stage.setTitle(problemList.getSelectionModel().getSelectedItem().getName() + " removing");
-        stage.show();
+            stage.setTitle(problemList.getSelectionModel().getSelectedItem().getName() + " removing");
+            stage.show();
+        } else {
+            Warnings.selectTheProblemWarning();
+        }
     }
 
     @FXML
@@ -177,6 +170,8 @@ public class AdminProblemView {
             stage.setTitle(problemList.getSelectionModel().getSelectedItem().getName() + " all results");
             stage.setScene(scene);
 
+        } else {
+            Warnings.selectTheProblemWarning();
         }
     }
 
@@ -201,6 +196,8 @@ public class AdminProblemView {
             stage.setTitle(problemList.getSelectionModel().getSelectedItem().getName() + " results");
             stage.setScene(scene);
 
+        } else {
+            Warnings.selectTheProblemWarning();
         }
     }
 
@@ -220,14 +217,20 @@ public class AdminProblemView {
 
     @FXML
     public void submit(ActionEvent event) throws FileNotFoundException {
-        String attemptText = "{attempt}";
-        if (file != null) {
-            Scanner scanner = new Scanner(file);
-            if (scanner.hasNext()) {
-                attemptText = scanner.nextLine();
+        if (problemList.getSelectionModel().getSelectedItem() != null) {
+            String attemptText = "{attempt}";
+            if (file != null) {
+                Scanner scanner = new Scanner(file);
+                if (scanner.hasNext()) attemptText = scanner.nextLine();
             }
+            if (choiceBox.getSelectionModel().isEmpty()) {
+                Warnings.selectCompilerWarning();
+            } else {
+                adminManager.getAttemptManager().submitAttempt(Context.getCurrentProblem(), attemptText, choiceBox.getValue().toString(), Context.getCurrentContestant());
+                results(event);
+            }
+        } else {
+            Warnings.selectTheProblemWarning();
         }
-        adminManager.getAttemptManager().submitAttempt(Context.getCurrentProblem(), attemptText, choiceBox.getValue().toString(), Context.getCurrentContestant());
-        results(event);
     }
 }

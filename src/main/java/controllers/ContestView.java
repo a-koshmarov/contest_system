@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import util.Context;
 
 import java.io.IOException;
 
@@ -24,11 +25,11 @@ public class ContestView {
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         initList();
     }
 
-    private void initList(){
+    private void initList() {
         contestListView.getItems().clear();
         contestListView.getItems().addAll(contestantManager.getAttemptManager().getUserContest(Context.getCurrentContestant()));
     }
@@ -42,7 +43,7 @@ public class ContestView {
 
     @FXML
     public void clickOnContest(MouseEvent event) throws IOException {
-        if(contestListView.getSelectionModel().getSelectedItem() != null) {
+        if (contestListView.getSelectionModel().getSelectedItem() != null) {
             if (event.getClickCount() == 2) {
                 Context.setCurrentContest(contestListView.getSelectionModel().getSelectedItem());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

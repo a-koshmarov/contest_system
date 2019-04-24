@@ -1,4 +1,4 @@
-package controllers;
+package util;
 
 import domain.entities.Contest;
 import domain.entities.Contestant;

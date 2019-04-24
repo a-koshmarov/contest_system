@@ -9,7 +9,7 @@ import domain.managers.interfaces.ContestantManagerInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminManager implements ContestantManagerInterface{
+public class AdminManager implements ContestantManagerInterface {
     private AttemptManager attemptManager = new AttemptManager();
     private ProblemManager problemManager = new ProblemManager();
     private ContestManager contestManager = new ContestManager();
@@ -28,7 +28,7 @@ public class AdminManager implements ContestantManagerInterface{
 
     @Override
     public List<Attempt> getAllUserAttempts(Problem problem, Contestant user) {
-        return new ArrayList<>(user.getAttemptsById());
+        return attemptManager.getUserAttempts(problem,user) ;
     }
 
     @Override

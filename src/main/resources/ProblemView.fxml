@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
+            prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProblemView">
     <bottom>
         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
                 <Button onAction="#chooseFile" mnemonicParsing="false" text="Upload file"/>
-                <ChoiceBox prefWidth="150.0"/>
-                <Button mnemonicParsing="false" text="Submit"/>
+                <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
+                <Button onAction="#submit" mnemonicParsing="false" text="Submit"/>
                 <Button onAction="#showResults" alignment="TOP_LEFT" mnemonicParsing="false" text="Results" textAlignment="CENTER"/>
             </items>
         </ToolBar>

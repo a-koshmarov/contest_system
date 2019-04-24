@@ -106,6 +106,6 @@ public class Attempt {
 
     @Override
     public String toString() {
-        return "Problem: "+problemsByProblemId.getName()+", text: " + text + ", return code: " + returnCode + ", compiler: " + compiler + ", test code: " + testCode + ", accepted: " + accepted;
+        return "User: "+contestantsByContestantId.getUserName()+", problem: "+problemsByProblemId.getName()+", text: " + text + ", return code: " + returnCode + ", compiler: " + compiler + ", test code: " + testCode + ", accepted: " + accepted;
     }
 }

@@ -1,6 +1,5 @@
 package controllers;
 
-import domain.entities.Problem;
 import domain.managers.AdminManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import util.Context;
 
 import java.io.File;
 import java.io.IOException;
